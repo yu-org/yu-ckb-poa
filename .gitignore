@@ -8,5 +8,6 @@ contracts/c/build/*
 
 # others
 build/*
+.idea
 !.gitkeep
 .tmp/
