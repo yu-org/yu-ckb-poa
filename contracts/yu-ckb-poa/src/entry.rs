@@ -12,6 +12,7 @@ use ckb_std::{
     debug,
     high_level::{load_script, load_tx_hash},
 };
+use crate::model::Evidences;
 
 use crate::error::Error;
 
