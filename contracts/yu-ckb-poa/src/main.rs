@@ -12,9 +12,9 @@
 #![feature(panic_info_message)]
 
 // define modules
-mod model;
 mod entry;
 mod error;
+mod model;
 
 use ckb_std::default_alloc;
 use core::arch::asm;

@@ -7,17 +7,26 @@ use alloc::{vec, vec::Vec};
 
 // Import CKB syscalls and structures
 // https://nervosnetwork.github.io/ckb-std/riscv64imac-unknown-none-elf/doc/ckb_std/index.html
+use crate::model::Evidences;
+use ckb_std::ckb_constants::Source;
+use ckb_std::high_level::load_witness_args;
 use ckb_std::{
     ckb_types::{bytes::Bytes, prelude::*},
     debug,
     high_level::{load_script, load_tx_hash},
 };
-use crate::model::Evidences;
 
 use crate::error::Error;
 
+const YU_POA_VALIDATOR_PUBKEY_A: &str =
+    "0xf40d8bd828cdd35a172571639ac309a673935a5298a28096b842eccc84aeab17";
+const YU_POA_VALIDATOR_PUBKEY_B: &str =
+    "0x123ce471d94b1b9eaf3aaf95d287d70544ec3326c0b98459efebd8b7b9e48223";
+const YU_POA_VALIDATOR_PUBKEY_C: &str =
+    "0xfc4636448ab2470bb8d9f2ebbba1e9f702d8d26121067f022089cbd8b38bf322";
+
 pub fn main() -> Result<(), Error> {
-    // remove below examples and write your code here
+    let witness = load_witness_args(0, Source::GroupInput)?;
 
     let script = load_script()?;
     let args: Bytes = script.args().unpack();
