@@ -9,7 +9,7 @@ use alloc::{vec, vec::Vec};
 // https://nervosnetwork.github.io/ckb-std/riscv64imac-unknown-none-elf/doc/ckb_std/index.html
 use crate::model::Evidences;
 use ckb_std::ckb_constants::Source;
-use ckb_std::high_level::load_witness_args;
+use ckb_std::high_level::{load_transaction, load_witness_args};
 use ckb_std::{
     ckb_types::{bytes::Bytes, prelude::*},
     debug,
@@ -26,8 +26,6 @@ const YU_POA_VALIDATOR_PUBKEY_C: &str =
     "0xfc4636448ab2470bb8d9f2ebbba1e9f702d8d26121067f022089cbd8b38bf322";
 
 pub fn main() -> Result<(), Error> {
-    let witness = load_witness_args(0, Source::GroupInput)?;
-
     let script = load_script()?;
     let args: Bytes = script.args().unpack();
     debug!("script args is {:?}", args);
@@ -37,10 +35,14 @@ pub fn main() -> Result<(), Error> {
         return Err(Error::MyError);
     }
 
+    let tx = load_transaction()?;
+    let outputs_data = tx.raw().outputs_data();
+    debug!("outputs_data is {:?}", outputs_data);
+
     let tx_hash = load_tx_hash()?;
     debug!("tx hash is {:?}", tx_hash);
 
-    let _buf: Vec<_> = vec![0u8; 32];
+    todo!("simulate validate success!");
 
     Ok(())
 }
